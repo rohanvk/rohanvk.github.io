@@ -1,0 +1,335 @@
+/* CONFIGURATION */
+$watch: (
+  size: 30px,
+  radius: 50%,
+  color: rgba(0, 0, 0, 1),
+  borderThickness: 1px,
+  borderColor: rgba(182, 182, 182, .4),
+  handsThickness: 2px,
+  handsSize: 95%,
+  handsColor: rgb(255, 255, 255)
+);
+
+
+
+/* DEFINE CHARACTERS (0-9 and colon) */
+$numbers: (
+    ( 
+      r b, l r, l r, l r, l b,
+      t b, r b, l r, l b, t b,
+      t b, t b, i i, t b, t b,
+      t b, t b, i i, t b, t b,
+      t b, t r, l r, l t, t b,
+      t r, l r, l r, l r, l t
+    ), (
+      i i, r b, l r, l b, i i,
+      i i, t r, l b, t b, i i,
+      i i, i i, t b, t b, i i,
+      i i, i i, t b, t b, i i,
+      i i, i i, t b, t b, i i,
+      i i, i i, t r, t l, i i
+    ), (
+      r b, l r, l r, l r, l b,
+      t r, l r, l r, l b, t b,
+      r b, l r, l r, t l, t b,
+      t b, r b, l r, l r, t l,
+      t b, t r, l r, l r, l b,
+      t r, l r, l r, l r, t l
+    ), (
+      r b, l r, l r, l r, l b,
+      t r, l r, l r, l b, t b,
+      i i, r b, l r, t l, t b,
+      i i, t r, l r, l b, t b,
+      r b, l r, l r, t l, t b,
+      t r, l r, l r, l r, t l
+    ), (
+      r b, l b, i i, i i, i i,
+      t b, t b, i i, i i, i i,
+      t b, t b, r b, l b, i i,
+      t b, t r, t l, t r, b l,
+      t r, l r, l b, r b, t l,
+      i i, i i, t r, t l, i i
+    ), (
+      r b, l r, l r, l r, l b,
+      t b, r b, l r, l r, t l,
+      t b, t r, l r, l r, l b,
+      t r, l r, l r, l b, t b,
+      r b, l r, l r, t l, t b,
+      t r, l r, l r, l r, t l
+    ), (
+      r b, l r, l r, l r, l b,
+      t b, r b, l r, l r, t l,
+      t b, t r, l r, l r, l b,
+      t b, r b, l r, l b, t b,
+      t b, t r, l r, t l, t b,
+      t r, l r, l r, l r, t l
+    ), (
+      r b, l r, l r, l r, l b,
+      t r, l r, l r, l b, t b,
+      i i, i i, i i, t b, t b,
+      i i, i i, i i, t b, t b,
+      i i, i i, i i, t b, t b,
+      i i, i i, i i, t r, t l
+    ), (
+      r b, l r, l r, l r, l b,
+      t b, r b, l r, l b, t b,
+      t b, t r, l r, t l, t b,
+      t b, r b, l r, l b, t b,
+      t b, t r, l r, t l, t b,
+      t r, l r, l r, l r, t l
+    ), (
+      r b, l r, l r, l r, l b,
+      t b, r b, l r, l b, t b,
+      t b, t r, l r, t l, t b,
+      t r, l r, l r, l b, t b,
+      r b, l r, l r, t l, t b,
+      t r, l r, l r, l r, t l
+    ), (
+      i i, i i, i i, i i, i i,
+      i i, r b, l r, l b, i i,
+      i i, t r, l r, t l, i i,
+      i i, r b, l r, l b, i i,
+      i i, t r, l r, t l, i i,
+      i i, i i, i i, i i, i i
+    )
+);
+
+
+
+/* HELPER FUNCTIONS */
+@function watch($key) {
+  @return map-get($watch, $key);
+}
+
+
+
+/* STYLING */
+body {
+  background: rgb(33, 33, 33);
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+h1 {
+  color: rgb(233, 30, 99);
+  font-weight: 300;
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+
+p {
+  color: rgb(182, 182, 182);
+}
+
+a {
+  color: inherit;
+}
+
+label {
+  display: inline-block;
+  padding: .5rem 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgb(233, 30, 99);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  
+  &:before {
+    content: attr(data-trigger-off);
+  }
+  
+  &:hover {
+    background: rgb(194, 24, 91); 
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 1);
+  }
+  
+  &:active {
+    top: 1px;
+  }
+}
+
+* {
+  &,
+  &:before,
+  &:after {
+    box-sizing: border-box;
+    transition: all 200ms linear;
+  }
+}
+
+.clock {
+  display: flex;
+  width: watch(size) * 5 * 5;
+  margin: 3rem auto 0;
+}
+
+.no {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 5 * watch(size);
+  
+  > * {
+    width: 20%;
+    height: watch(size);
+    background: watch(color);
+    border: watch(borderThickness) solid watch(borderColor);
+    position: relative;
+    border-radius: watch(radius);
+    
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: watch(handsThickness);
+      height: watch(handsSize) / 2;
+      background: watch(handsColor);
+      transform-origin: bottom center;
+      left: 50%;
+      top: 10%;
+    }
+  }
+}
+
+
+
+/* MIXINS */
+@mixin hand($pos: false) {
+  // get the rotation for the hand
+  $handAngle: 45;
+  
+  @if $pos == t {
+    $handAngle: 0;
+  } @else if $pos == r {
+    $handAngle: 90;
+  } @else if $pos == b {
+    $handAngle: 180;
+  } @else if $pos == l {
+    $handAngle: 270;
+  }
+  
+  transform: rotateZ($handAngle * 1deg);
+
+}
+
+@mixin createNumber($number) {
+  // cache the number
+  @if type-of($number) == number {
+    $number: nth($numbers, $number + 1);
+  } @else {
+    $number: nth($numbers, length($numbers));
+  }
+  
+  > * {
+    @for $i from 1 through 30 {
+      &:nth-child(#{$i}) {
+        &:before {
+          @include hand(nth(nth($number, $i), 1));
+        }
+        &:after {
+          @include hand(nth(nth($number, $i), 2));
+        }
+      }
+    }
+  }
+}
+
+
+/* INCREMENT NUMBERS */
+@mixin incrementNumber($type, $maxNumber: 9, $duration: 10s, $morph: false) {
+  > * {
+    @for $i from 1 through 30 {
+      &:nth-child(#{$i}) {
+        &:before {
+          animation: #{$type}-before-#{$i} $duration infinite;
+        }
+        &:after {
+          animation: #{$type}-after-#{$i} $duration infinite;
+        }        
+      }
+      
+      @at-root {
+        @keyframes #{$type}-before-#{$i} {
+          @for $j from 1 through $maxNumber {
+            @if $morph {
+              #{$j * (100% / ($maxNumber + 1)) - 2%} { @include hand(nth(nth(nth($numbers, $j), $i), 1)); }                 
+            }
+            #{$j * (100% / ($maxNumber + 1))} { @include hand(nth(nth(nth($numbers, $j + 1), $i), 1)); }
+          }
+          
+          @if $morph {
+            #{98%} { @include hand(nth(nth(nth($numbers, $maxNumber + 1), $i), 1)); }
+          }
+        }
+
+        @keyframes #{$type}-after-#{$i} {
+          @for $j from 1 through $maxNumber {
+            @if $morph {
+              #{$j * (100% / ($maxNumber + 1)) - 2%} { @include hand(nth(nth(nth($numbers, $j), $i), 2)); }            
+            }
+            #{$j * (100% / ($maxNumber + 1))} { @include hand(nth(nth(nth($numbers, $j + 1), $i), 2)); }
+          }
+          
+          @if $morph {
+            #{98%} { @include hand(nth(nth(nth($numbers, $maxNumber + 1), $i), 2)); }
+          }
+          
+        }
+        
+      }
+    }  
+  }
+}
+
+
+
+/* SET INITIAL NUMBERS */
+.no {
+  @include createNumber(0);
+  
+  &--colon {
+    @include createNumber(colon);
+  }
+  
+  &--min-units { @include incrementNumber(min-units, 9, 600s, true)}
+  
+  &--sec-tens { @include incrementNumber(sec-tens, 5, 60s, true); }
+  
+  &--sec-units { @include incrementNumber(sec-units); }
+
+  
+  &--min-tens.no--sec-tens {
+    > * {
+      &:before,
+      &:after {
+        animation-duration: 3600s;
+      }
+    }
+  }
+}
+
+/* Animation control */
+input {
+  position: absolute;
+  left: -9999px;
+  
+  &:checked {
+    ~ .clock {
+      & * {
+        &:before,
+        &:after {
+          animation-play-state: paused!important;
+        }    
+      }
+    }
+    
+    ~ label {
+      &:before {
+        content: attr(data-trigger-on);
+      }
+    }
+  }
+}
