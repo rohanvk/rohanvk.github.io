@@ -1,4 +1,4 @@
-# Folio 2019
+# Project
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
@@ -19,5 +19,4 @@ npm run build
 ```
 
 ```
-🥚 2021eggpvlzscw
 ```
