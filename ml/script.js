@@ -17,7 +17,7 @@ async function uploadImage() {
         predictionText.textContent = 'Predicting...';
 
         // Load the TensorFlow.js model
-        const model = await tf.loadLayersModel('model.json');
+        const model = await tf.loadLayersModel('tfjs_model/model.json');
 
         // Preprocess the image and make a prediction
         const tensor = preprocessImage(img);
