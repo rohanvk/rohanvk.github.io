@@ -31,15 +31,19 @@ async function uploadImage() {
 
 // Define function to preprocess the image
 function preprocessImage(img) {
-    // Resize the image to match the input size expected by the model
-    const tensor = tf.browser.fromPixels(img)
-        .resizeNearestNeighbor([150, 150])
-        .toFloat();
+    return tf.tidy(() => {
+        // Convert the image to a tensor
+        const tensor = tf.browser.fromPixels(img)
+            .resizeNearestNeighbor([150, 150])
+            .toFloat();
 
-    // Normalize the pixel values
-    const offset = tf.scalar(255);
-    return tensor.div(offset);
+        // Normalize the pixel values to the range [0, 1]
+        return tensor.div(255.0)
+            // Expand dimensions to add a batch dimension
+            .expandDims();
+    });
 }
+
 
 document.getElementById('imageForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission behavior
