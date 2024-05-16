@@ -10,6 +10,15 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <!-- Your HTML content here -->
+<body>
+    <h1>Image Prediction</h1>
+    <form method="POST" action="/predict" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Predict">
+    </form>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+</body>
 </body>
 </html>
