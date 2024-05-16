@@ -11,10 +11,11 @@
 </head>
 <body>
     <h1>Image Prediction</h1>
-    <form method="POST" action="/predict" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="submit" value="Predict">
-    </form>
+	<form id="imageForm" method="POST" enctype="multipart/form-data">
+		<input type="file" name="file" id="fileInput">
+		<input type="button" value="Predict" onclick="uploadImage()">
+	</form>
+
     {% if message %}
     <p>{{ message }}</p>
     {% endif %}
