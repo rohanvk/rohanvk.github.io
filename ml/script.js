@@ -40,3 +40,8 @@ function preprocessImage(img) {
     const offset = tf.scalar(255);
     return tensor.div(offset);
 }
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+    uploadImage(); // Call the function to handle image upload and prediction
+});
