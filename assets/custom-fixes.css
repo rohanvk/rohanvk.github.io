@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+/* Navigation overrides */
+.wp-block-navigation__responsive-container {
+    display: none !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100000;
+    flex-direction: column;
+    padding: 2rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: #111111 !important; /* Fixes scroll duplication bug */
+    -webkit-overflow-scrolling: touch;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    overscroll-behavior: none;
+}
+.wp-block-navigation__responsive-container.is-menu-open {
+    display: flex !important;
+}
+
+/* Close button positioning */
+.wp-block-navigation__responsive-container-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+}
+.wp-block-navigation__responsive-container-close svg {
+    fill: currentColor;
+}
+
+/* Ensure mobile menu links remain visible and legible */
+.wp-block-navigation__responsive-container a, 
+.wp-block-navigation-item__content {
+    color: white !important; 
+    text-decoration: none !important;
+    font-size: 1.5rem !important;
+    line-height: 2 !important;
+}
+
+/* Force each mobile menu item onto its own line */
+.wp-block-navigation__responsive-container .wp-block-pages-list__item {
+    display: block !important;
+    width: 100% !important;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Background Image Updates */
+.wp-block-cover.fullscreen-bg {
+    min-height: 100vh !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ensure the background images cover the section and have low opacity */
+.wp-block-cover.fullscreen-bg > .background-opacity,
+.wp-block-cover.fullscreen-bg > .wp-block-cover__image-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    opacity: 0.3 !important; /* Lower opacity behind content */
+    z-index: -1;
+}
+
+/* Typography and Overflow fixes for Mobile */
+@media (max-width: 600px) {
+    /* Override forced nowrap on mobile columns */
+    .wp-block-columns {
+        flex-wrap: wrap !important;
+        flex-direction: column !important;
+    }
+    .wp-block-column {
+        flex-basis: 100% !important;
+        width: 100% !important;
+    }
+    .wp-block-group.is-nowrap,
+    [class*="wp-container-core-columns-is-layout-"],
+    [class*="wp-container-core-group-is-layout-"] {
+        flex-wrap: wrap !important;
+        flex-direction: column !important;
+    }
+
+    /* Aggressive fixing of text wrapping to ensure readability */
+    h1, h2, h3, h4, h5, h6, .wp-block-heading {
+        font-size: 2rem !important; /* Smaller text avoids truncation */
+        line-height: 1.2 !important;
+        word-wrap: normal !important;
+        word-break: normal !important; /* Stop breaking individual characters */
+        white-space: normal !important;
+    }
+    
+    p, li, .wp-block-post-content {
+        font-size: 1.1rem !important;
+        line-height: 1.5 !important;
+        word-wrap: normal !important; 
+        word-break: normal !important;
+    }
+
+    .wp-block-cover__inner-container h2 {
+        font-size: 2rem !important;
+    }
+
+    /* Images */
+    .wp-block-image img, 
+    figure img {
+        max-width: 100% !important;
+        height: auto !important;
+        width: 100% !important;
+    }
+
+    /* Titles */
+    .wp-block-site-title {
+        font-size: 1.8rem !important;
+        word-break: normal !important;
+    }
+}
+
+/* Hide broken lightbox overlay */
+.wp-lightbox-container button, .wp-lightbox-overlay {
+    display: none !important;
+}
+
+
+/* Global Typography Consistency */
+body, p, li, h1, h2, h3, h4, h5, h6, a, span, div {
+    font-family: 'Chivo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+body, p, li {
+    color: #111111 !important;
+    font-size: 1.15rem !important;
+    line-height: 1.6 !important;
+}
+
+h1, h2, h3, h4, h5, h6, .wp-block-heading, .wp-block-post-title {
+    color: #000000 !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.05em !important;
+}
+
+/* Keep body text light too */
+body, p, li, span {
+    font-weight: 300 !important;
+}
+
+/* Ensure links are consistent everywhere */
+a, a:visited, a:active {
+    color: #333333 !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease-in-out;
+}
+a:hover {
+    color: #000000 !important;
+    
+    text-decoration: underline !important;
+}
+
+/* Overriding any specific inline styles that WordPress added to individual paragraphs */
+.has-text-color {
+    color: inherit !important;
+}
+.has-background {
+    color: inherit !important;
+}
+
+/* Ensure the background images cover the section and have low opacity */
+.wp-block-cover.fullscreen-bg > .background-opacity,
+.wp-block-cover.fullscreen-bg > .wp-block-cover__image-background {
+    opacity: 0.4 !important; /* Slightly increased for texture visibility */
+}
+
+/* Subpage intro two-column layout */
+.subpage-intro-layout {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 2rem !important;
+    align-items: flex-start !important;
+    margin-bottom: 2rem !important;
+}
+.subpage-intro-layout img {
+    max-width: 320px !important;
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
+}
+@media (max-width: 600px) {
+    .subpage-intro-layout {
+        flex-direction: column !important;
+    }
+    .subpage-intro-layout img {
+        max-width: 100% !important;
+    }
+}
