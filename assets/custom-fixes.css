@@ -238,3 +238,21 @@ a:hover {
     margin-left: auto !important;
     margin-right: auto !important;
 }
+
+/* Performance Fixes for Scroll Jank */
+.wp-block-cover__image-background,
+.wp-block-cover__background,
+.wp-block-cover.fullscreen-bg {
+    /* Force GPU hardware acceleration for massive background images and filters */
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+/* Optimize images with large box-shadows */
+figure.wp-block-image img {
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
+    will-change: transform;
+}
