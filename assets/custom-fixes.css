@@ -204,3 +204,37 @@ a:hover {
         max-width: 100% !important;
     }
 }
+
+/* Force centering for all section content inside cover blocks */
+.wp-block-cover .wp-block-cover__inner-container .wp-block-group,
+.wp-block-cover .wp-block-cover__inner-container .wp-block-column {
+    text-align: center !important;
+    width: 100% !important;
+}
+
+.wp-block-cover .wp-block-cover__inner-container h2,
+.wp-block-cover .wp-block-cover__inner-container p {
+    text-align: center !important;
+    width: 100% !important;
+}
+
+.wp-block-cover .wp-block-cover__inner-container figure {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Force centering for sections outside cover blocks (History of Concrete, etc.) */
+.wp-block-columns.alignwide .wp-block-group {
+    text-align: center !important;
+    width: 100% !important;
+}
+
+.wp-block-columns.alignwide h2,
+.wp-block-columns.alignwide p {
+    text-align: center !important;
+}
+
+.wp-block-columns.alignwide figure {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
